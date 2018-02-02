@@ -4,7 +4,7 @@
     "type": "symfony-bundle",
     "keywords": ["Symfony", "bundle", "dashboard"],
     "homepage": "https://github.com/bosske1/xcentric-dashboard",
-    "license": "APACHE",
+    "license": "MIT",
     "require": {
         "php": "^7.1",
 	"doctrine/doctrine-bundle": "^1.6",
