@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * Class Dashboard
  * @package Xcentric\Bundle\XcentricDashboardBundle\Entity
+ * @ORM\Entity()
+ * @ORM\Table(name="dashboard_dashboards")
  */
 class Dashboard extends AbstractDashboardEntity
 {
