@@ -2,8 +2,11 @@
 
 namespace Xcentric\Bundle\XcentricDashboardBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\ORM\Mapping as ORM;
+    use Doctrine\ORM\Mapping as ORM;
+    use JMS\Serializer\Annotation as Serializer;
 
 /**
  *
@@ -28,6 +31,22 @@ class Dashboard extends AbstractDashboardEntity
      * @Gedmo\Translatable()
      */
     private $name;
+
+    /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="dashboard")
+     * @Serializer\Exclude
+     */
+    private $pages;
+
+    /**
+     * Dashboard constructor.
+     */
+    public function __construct()
+    {
+        $this->pages = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -62,6 +81,50 @@ class Dashboard extends AbstractDashboardEntity
     public function setName(string $name): Dashboard
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getPages(): Collection
+    {
+        return $this->pages;
+    }
+
+    /**
+     * @param Collection $pages
+     * @return Dashboard
+     */
+    public function setPages(Collection $pages): Dashboard
+    {
+        $this->pages = $pages;
+        return $this;
+    }
+
+    /**
+     * @param Page $page
+     * @return Dashboard
+     */
+    public function addPage(Page $page): Dashboard
+    {
+        if (!$this->pages->contains($page)) {
+            $this->pages->add($page);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Page $page
+     * @return Dashboard
+     */
+    public function removePage(Page $page): Dashboard
+    {
+        if ($this->pages->contains($page)) {
+            $this->pages->remove($page);
+        }
+
         return $this;
     }
 

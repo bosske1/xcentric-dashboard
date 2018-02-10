@@ -2,7 +2,9 @@
 
 namespace Xcentric\Bundle\XcentricDashboardBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  *
@@ -15,6 +17,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Action
 {
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=155, nullable=false)
+     * @Gedmo\Translatable()
+     */
+    private $name;
+
     /**
      * @var string
      * @ORM\Column(type="string", length=155, nullable=false)
@@ -32,8 +41,27 @@ class Action
      *
      * @ORM\ManyToOne(targetEntity="Box", inversedBy="actions")
      * @ORM\JoinColumn(name="box_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Serializer\Exclude
      */
     protected $box;
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Action
+     */
+    public function setName(string $name): Action
+    {
+        $this->name = $name;
+        return $this;
+    }
 
     /**
      * @return string

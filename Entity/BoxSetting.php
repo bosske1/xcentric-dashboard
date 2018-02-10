@@ -3,6 +3,7 @@
 namespace Xcentric\Bundle\XcentricDashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  *
@@ -20,6 +21,7 @@ class BoxSetting extends AbstractSetting
      *
      * @ORM\ManyToOne(targetEntity="Box", inversedBy="settings")
      * @ORM\JoinColumn(name="box_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Serializer\Exclude
      */
     protected $box;
 

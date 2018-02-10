@@ -3,6 +3,7 @@
 namespace Xcentric\Bundle\XcentricDashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  *
@@ -20,6 +21,7 @@ class DashboardSetting extends AbstractSetting
      *
      * @ORM\ManyToOne(targetEntity="Dashboard", inversedBy="settings")
      * @ORM\JoinColumn(name="dashboard_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Serializer\Exclude
      */
     protected $dashboard;
 
